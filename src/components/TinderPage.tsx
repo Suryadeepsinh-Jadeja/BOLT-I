@@ -25,14 +25,6 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import Stack from './Stack';
 import bgVideo from '../bg.mp4';
-import investor1 from './assets/investor/investor1.jpeg';
-import investor2 from './assets/investor/investor2.jpeg';
-import investor3 from './assets/investor/investor3.jpeg';
-import investor4 from './assets/investor/investor4.jpeg';
-import startup1 from './assets/startup/startup1.png';
-import startup2 from './assets/startup/startup2.png';
-import startup3 from './assets/startup/startup3.jpeg';
-import startup4 from './assets/startup/startup4.png';
 
 const Card = styled(motion.div)`
   position: absolute;
@@ -340,6 +332,21 @@ function TinderPage() {
 
   const navigate = useNavigate();
 
+  // Stock photos from Pexels for investors and startups
+  const investorImages = [
+    "https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "https://images.pexels.com/photos/1181690/pexels-photo-1181690.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=400"
+  ];
+
+  const startupImages = [
+    "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=400"
+  ];
+
   // Get user role from backend using token
   useEffect(() => {
     const getUserRole = async () => {
@@ -385,9 +392,7 @@ function TinderPage() {
         });
         if (!res.ok) throw new Error("Failed to fetch profiles");
         const data = await res.json();
-        // Static image arrays
-        const investorImages = [investor1, investor2, investor3, investor4];
-        const startupImages = [startup1, startup2, startup3, startup4];
+        
         // Map backend data to CardData format if needed
         const mapped = (data.profiles || data).map((item: any, idx: number) => {
           if (userRole === "startup") {
@@ -713,4 +718,4 @@ function TinderPage() {
   );
 }
 
-export default TinderPage; 
+export default TinderPage;

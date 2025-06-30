@@ -21,14 +21,6 @@ import {
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 import { io, Socket } from "socket.io-client";
-import investor1 from './assets/investor/investor1.jpeg';
-import investor2 from './assets/investor/investor2.jpeg';
-import investor3 from './assets/investor/investor3.jpeg';
-import investor4 from './assets/investor/investor4.jpeg';
-import startup1 from './assets/startup/startup1.png';
-import startup2 from './assets/startup/startup2.png';
-import startup3 from './assets/startup/startup3.jpeg';
-import startup4 from './assets/startup/startup4.png';
 
 const StyledChatPage = styled.div`
   background: linear-gradient(
@@ -274,6 +266,21 @@ const ChatPage: React.FC = () => {
   const [userId, setUserId] = useState<string | null>(null);
   const navigate = useNavigate();
 
+  // Stock photos from Pexels for investors and startups
+  const investorImages = [
+    "https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "https://images.pexels.com/photos/1181690/pexels-photo-1181690.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=400"
+  ];
+
+  const startupImages = [
+    "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=400"
+  ];
+
   useEffect(() => {
     fetchUserRole();
   }, []);
@@ -427,9 +434,7 @@ const ChatPage: React.FC = () => {
 
       if (response.ok) {
         const data = await response.json();
-        // Static image arrays
-        const investorImages = [investor1, investor2, investor3, investor4];
-        const startupImages = [startup1, startup2, startup3, startup4];
+        
         const mappedContacts = data.profiles.map((profile: any, idx: number) => ({
           id: profile.userId || profile._id,
           name: role === "startup" ? profile.fullName : profile.companyName,
